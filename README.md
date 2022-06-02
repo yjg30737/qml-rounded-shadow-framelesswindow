@@ -1,11 +1,11 @@
-# qml-rounded-corner-shadow-framelesswindow
+# qml-rounded-shadow-framelesswindow
 Rounded corner, shadow-bordered frameless window made out of qml, execute with PyQt5
 
 ## Requirements
 * PyQt5 >= 5.8
 
 ## Setup
-`python -m pip install git+https://github.com/yjg30737/qml-rounded-corner-shadow-framelesswindow.git --upgrade`
+`python -m pip install git+https://github.com/yjg30737/qml-rounded-shadow-framelesswindow.git --upgrade`
 
 ## Example
 ```python
