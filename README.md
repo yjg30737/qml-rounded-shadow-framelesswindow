@@ -1,6 +1,10 @@
 # qml-rounded-shadow-framelesswindow
 Rounded corner, shadow-bordered frameless window made out of qml, execute with PyQt5
 
+This is the project for my personal QML practicing, so far, at least.
+
+Of course you can look these whole things up for the sake of your practice as well.
+
 ## Requirements
 * PyQt5 >= 5.8
 
@@ -16,6 +20,8 @@ showQml()
 
 Result
 
-![image](https://user-images.githubusercontent.com/55078043/171600608-354bb370-5a9d-4549-ae6b-8e7ee7765ff3.png)
+![image](https://user-images.githubusercontent.com/55078043/171763017-410ae94b-98a8-4982-bd4c-c85e7a297e17.png)
+
+Note: The white background is not the part of this UI.
 
 
