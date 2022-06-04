@@ -9,11 +9,15 @@ Window {
     color: "transparent"
     flags: Qt.FramelessWindowHint
     visible: true
-    width: 300
+    minimumWidth: 500
     height: 250
 
-    DragHandler {
-        onActiveChanged: if (active) { window.startSystemMove(); }
+    function toggleMaximized() {
+        if (window.visibility === Window.Maximized) {
+            window.showNormal();
+        } else {
+            window.showMaximized();
+        }
     }
 
     RectangularGlow {
@@ -47,9 +51,33 @@ Window {
             }
             Item {
                 anchors.fill: parent
+                TapHandler {
+                    onTapped: if (tapCount === 2) toggleMaximized()
+                    gesturePolicy: TapHandler.DragThreshold
+                }
+                DragHandler {
+                    grabPermissions: TapHandler.CanTakeOverFromAnything
+                    onActiveChanged: if (active) { window.startSystemMove(); }
+                }
+                Label {
+                    anchors.fill: parent
+                    text: "QML Practice"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
                 RowLayout {
                     anchors.right: parent.right
-                    spacing: 3
+                    spacing: 0
+                    ToolButton {
+                        text: "🗕"
+                        font.pixelSize: Qt.application.font.pixelSize * 1.6
+                        onClicked: window.showMinimized();
+                    }
+                    ToolButton {
+                        text: window.visibility == Window.Maximized ? "🗗" : "🗖"
+                        font.pixelSize: Qt.application.font.pixelSize * 1.6
+                        onClicked: window.toggleMaximized()
+                    }
                     ToolButton {
                         text: qsTr("🗙")
                         font.pixelSize: Qt.application.font.pixelSize * 1.4
