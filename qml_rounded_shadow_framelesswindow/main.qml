@@ -59,11 +59,20 @@ Window {
                     grabPermissions: TapHandler.CanTakeOverFromAnything
                     onActiveChanged: if (active) { window.startSystemMove(); }
                 }
-                Label {
-                    anchors.fill: parent
-                    text: "QML Practice"
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+                RowLayout {
+                    anchors.centerIn: parent
+                    Image {
+                        source: "images/peace.svg"
+                        width: 24
+                        height: 24
+                        sourceSize.width: 24
+                        sourceSize.height: 24
+                    }
+                    Label {
+                        text: "QML Practice"
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 RowLayout {
                     anchors.right: parent.right
