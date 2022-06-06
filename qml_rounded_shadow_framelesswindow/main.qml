@@ -11,6 +11,8 @@ Window {
     visible: true
     minimumWidth: 500
     height: 250
+    property string currTime: "00:00:00"
+    property QtObject backend
 
     function toggleMaximized() {
         if (window.visibility === Window.Maximized) {
@@ -180,7 +182,25 @@ Window {
             }
             Text {
                 anchors.centerIn: parent
-                text: "Hello world!"
+                text: currTime
+                font.pixelSize: 60
+                color: "white"
+
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 0
+                    color: "skyblue"
+                    radius: 9
+                    samples: 19
+                }
+            }
+        }
+
+        Connections {
+            target: backend
+
+            function onUpdated(msg) {
+                currTime = msg;
             }
         }
 
