@@ -20,7 +20,7 @@ showQml()
 
 Result
 
-![image](https://user-images.githubusercontent.com/55078043/171985532-952277b9-cf2a-450d-9bc8-97caaf720b56.png)
+![image](https://user-images.githubusercontent.com/55078043/172076232-338b2b92-6386-4c28-9d3a-56f0e3156ed9.png)
 
 Note: The white background is not the part of this UI.
 
