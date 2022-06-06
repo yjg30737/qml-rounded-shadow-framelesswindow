@@ -20,6 +20,22 @@ Window {
         }
     }
 
+    DragHandler {
+        id: resizeHandler
+        grabPermissions: TapHandler.TakeOverForbidden
+        target: null
+        onActiveChanged: if (active) {
+            const p = resizeHandler.centroid.position;
+            let e = 0;
+            if (p.x / width < 0.10) { e |= Qt.LeftEdge }
+            if (p.x / width > 0.90) { e |= Qt.RightEdge }
+            if (p.y / height < 0.10) { e |= Qt.TopEdge }
+            if (p.y / height > 0.90) { e |= Qt.BottomEdge }
+            console.log("RESIZING", e);
+            window.startSystemResize(e);
+        }
+    }
+
     RectangularGlow {
         id: effect
         anchors.fill: rect
@@ -81,6 +97,20 @@ Window {
                         text: "🗕"
                         font.pixelSize: Qt.application.font.pixelSize * 1.6
                         onClicked: window.showMinimized();
+                        /*
+                        background: Rectangle {
+                            color: "transparent"
+                            MouseArea {
+                                hoverEnabled: true
+                                onEntered: {
+                                    ColorAnimation on color {
+                                        to: "red"
+                                        duration: 1000
+                                    }
+                                }
+                            }
+                        }
+                        */
                     }
                     ToolButton {
                         text: window.visibility == Window.Maximized ? "🗗" : "🗖"
@@ -107,6 +137,47 @@ Window {
         Rectangle {
             anchors.fill: parent
             gradient: "RainyAshville"
+            Rectangle {
+                anchors.top: parent.top
+                width: parent.width
+                height: 30
+                gradient: "MalibuBeach"
+                RowLayout {
+                    anchors.left: parent.left
+                    spacing: 0
+                    height: parent.height
+                    MenuItem {
+                        text: qsTr("File")
+                        contentItem: Label {
+                            text: parent.text
+                            color: parent.down ? "black" : "white"
+                        }
+                        background: Rectangle {
+                            color: "transparent"
+                        }
+                    }
+                    MenuItem {
+                        text: qsTr("Edit")
+                        contentItem: Label {
+                            text: parent.text
+                            color: parent.down ? "black" : "white"
+                        }
+                        background: Rectangle {
+                            color: "transparent"
+                        }
+                    }
+                    MenuItem {
+                        text: qsTr("View")
+                        contentItem: Label {
+                            text: parent.text
+                            color: parent.down ? "black" : "white"
+                        }
+                        background: Rectangle {
+                            color: "transparent"
+                        }
+                    }
+                }
+            }
             Text {
                 anchors.centerIn: parent
                 text: "Hello world!"
