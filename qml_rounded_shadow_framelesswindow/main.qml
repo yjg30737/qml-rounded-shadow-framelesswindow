@@ -54,7 +54,6 @@ Window {
         width: Math.round(parent.width / 1.5)
         height: Math.round(parent.height / 2)
         radius: 10
-
     }
 
     Page {
@@ -169,9 +168,18 @@ Window {
                                 implicitWidth: menuButton.width * 3
                                 gradient: "FrozenDreams"
                             }
-
-                            MenuItem { text: "New" }
-                            MenuItem { text: "Settings" }
+                            MenuItem {
+                                id: newMenuItem
+                                text: "&New"
+                                Loader { id: newPageLoader }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: newPageLoader.source = "main.qml"
+                                }
+                            }
+                            MenuItem {
+                                text: "Settings"
+                            }
                             MenuSeparator { }
                             MenuItem {
                                 text: "Exit"
