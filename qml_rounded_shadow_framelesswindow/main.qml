@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick 2.15
 import QtQuick.Controls 2.3
 import QtQuick.Window 2.3
 import QtGraphicalEffects 1.12
@@ -22,19 +22,22 @@ ApplicationWindow {
         }
     }
 
-    DragHandler {
-        id: resizeHandler
-        grabPermissions: TapHandler.TakeOverForbidden
-        target: null
-        onActiveChanged: if (active) {
-            const p = resizeHandler.centroid.position;
-            let e = 0;
-            if (p.x / width < 0.10) { e |= Qt.LeftEdge }
-            if (p.x / width > 0.90) { e |= Qt.RightEdge }
-            if (p.y / height < 0.10) { e |= Qt.TopEdge }
-            if (p.y / height > 0.90) { e |= Qt.BottomEdge }
-            console.log("RESIZING", e);
-            window.startSystemResize(e);
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: containsMouse ? Qt.OpenHandCursor : Qt.ArrowCursor
+        DragHandler {
+            id: resizeHandler
+            onActiveChanged: if (active) {
+                const p = resizeHandler.centroid.position;
+                let e = 0;
+                if (p.x / width < 0.10) { e |= Qt.LeftEdge }
+                if (p.x / width > 0.90) { e |= Qt.RightEdge }
+                if (p.y / height < 0.10) { e |= Qt.TopEdge }
+                if (p.y / height > 0.90) { e |= Qt.BottomEdge }
+                console.log("RESIZING", e);
+                window.startSystemResize(e);
+            }
         }
     }
 
@@ -168,31 +171,28 @@ ApplicationWindow {
                                 implicitWidth: menuButton.width * 3
                                 gradient: "FrozenDreams"
                             }
-                            MenuItem {
-                                id: newMenuItem
-                                text: "&New"
-                                MouseArea {
-                                    anchors.fill: parent
-                                    Loader { id: newPageLoader }
-                                    onClicked: {
-                                        newPageLoader.source = "main.qml"
-                                    }
+                            Action {
+                                id: newAction
+                                text: "New"
+                                shortcut: StandardKey.New
+                                onTriggered: {
+                                    var component = Qt.createComponent("main.qml")
+                                    var window = component.createObject("window")
+                                    window.show()
                                 }
                             }
-                            MenuItem {
-                                text: "&Settings"
-                                MouseArea {
-                                    anchors.fill: parent
-                                    Loader { id: settingsPageLoader }
-                                    onClicked: {
-                                        settingsPageLoader.source = "settings.qml"
-                                    }
+                            Action {
+                                text: "Settings"
+                                onTriggered: {
+                                    var component = Qt.createComponent("settings.qml")
+                                    var settings = component.createObject("settingsWindow")
+                                    settings.show()
                                 }
                             }
                             MenuSeparator { }
-                            MenuItem {
-                                text: "&Exit"
-                                onClicked: window.close()
+                            Action {
+                                text: "Exit"
+                                onTriggered: window.close()
                             }
                         }
                     }
