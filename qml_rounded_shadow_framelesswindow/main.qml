@@ -140,6 +140,7 @@ Window {
             anchors.fill: parent
             gradient: "RainyAshville"
             Rectangle {
+                id: menuBar
                 anchors.top: parent.top
                 width: parent.width
                 height: 30
@@ -148,8 +149,9 @@ Window {
                     anchors.left: parent.left
                     spacing: 0
                     height: parent.height
-                    MenuItem {
-                        text: qsTr("File")
+                    Button {
+                        id: menuButton
+                        text: "File"
                         contentItem: Label {
                             text: parent.text
                             color: parent.down ? "black" : "white"
@@ -157,25 +159,24 @@ Window {
                         background: Rectangle {
                             color: "transparent"
                         }
-                    }
-                    MenuItem {
-                        text: qsTr("Edit")
-                        contentItem: Label {
-                            text: parent.text
-                            color: parent.down ? "black" : "white"
-                        }
-                        background: Rectangle {
-                            color: "transparent"
-                        }
-                    }
-                    MenuItem {
-                        text: qsTr("View")
-                        contentItem: Label {
-                            text: parent.text
-                            color: parent.down ? "black" : "white"
-                        }
-                        background: Rectangle {
-                            color: "transparent"
+                        onClicked: menu.open()
+
+                        Menu {
+                            id: menu
+                            y: menuBar.height - 3
+
+                            background: Rectangle {
+                                implicitWidth: menuButton.width * 3
+                                gradient: "FrozenDreams"
+                            }
+
+                            MenuItem { text: "New" }
+                            MenuItem { text: "Settings" }
+                            MenuSeparator { }
+                            MenuItem {
+                                text: "Exit"
+                                onClicked: window.close()
+                            }
                         }
                     }
                 }
