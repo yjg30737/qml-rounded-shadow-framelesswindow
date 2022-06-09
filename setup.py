@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='qml-rounded-shadow-framelesswindow',
-    version='0.0.8',
+    version='0.0.9',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
