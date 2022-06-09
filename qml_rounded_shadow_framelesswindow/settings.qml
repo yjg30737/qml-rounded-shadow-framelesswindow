@@ -4,8 +4,8 @@ import QtQuick.Window 2.3
 import QtGraphicalEffects 1.12
 import QtQuick.Layouts 1.3
 
-Window {
-    id: window
+ApplicationWindow {
+    id: settingsWindow
     color: "transparent"
     flags: Qt.FramelessWindowHint
     visible: true
@@ -32,6 +32,7 @@ Window {
 
     Page {
         anchors.fill: rect
+
         header: ToolBar {
             id: header
             background: Rectangle {
@@ -84,7 +85,7 @@ Window {
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
-                        onClicked: window.close()
+                        onClicked: settingsWindow.close()
                     }
                 }
             }
@@ -93,7 +94,6 @@ Window {
         Rectangle {
             anchors.fill: parent
             gradient: "RainyAshville"
-
         }
 
         layer.enabled: true
