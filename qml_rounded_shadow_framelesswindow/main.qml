@@ -4,7 +4,7 @@ import QtQuick.Window 2.3
 import QtGraphicalEffects 1.12
 import QtQuick.Layouts 1.3
 
-Window {
+ApplicationWindow {
     id: window
     color: "transparent"
     flags: Qt.FramelessWindowHint
@@ -171,18 +171,27 @@ Window {
                             MenuItem {
                                 id: newMenuItem
                                 text: "&New"
-                                Loader { id: newPageLoader }
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: newPageLoader.source = "main.qml"
+                                    Loader { id: newPageLoader }
+                                    onClicked: {
+                                        newPageLoader.source = "main.qml"
+                                    }
                                 }
                             }
                             MenuItem {
-                                text: "Settings"
+                                text: "&Settings"
+                                MouseArea {
+                                    anchors.fill: parent
+                                    Loader { id: settingsPageLoader }
+                                    onClicked: {
+                                        settingsPageLoader.source = "settings.qml"
+                                    }
+                                }
                             }
                             MenuSeparator { }
                             MenuItem {
-                                text: "Exit"
+                                text: "&Exit"
                                 onClicked: window.close()
                             }
                         }
