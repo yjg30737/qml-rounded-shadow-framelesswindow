@@ -97,40 +97,36 @@ ApplicationWindow {
                 RowLayout {
                     anchors.right: parent.right
                     spacing: 0
-                    ToolButton {
+                    Button {
+                        id: minimizeBtn
                         text: "🗕"
                         font.pixelSize: Qt.application.font.pixelSize * 1.6
                         onClicked: window.showMinimized();
-                        /*
+
                         background: Rectangle {
-                            color: "transparent"
-                            MouseArea {
-                                hoverEnabled: true
-                                onEntered: {
-                                    ColorAnimation on color {
-                                        to: "red"
-                                        duration: 1000
-                                    }
-                                }
-                            }
+                            opacity: enabled ? 0.8 : 0.3
+                            color: minimizeBtn.down ? "#f5f5f5" : (minimizeBtn.hovered ? "#fefefe": "transparent")
                         }
-                        */
                     }
-                    ToolButton {
+                    Button {
+                        id: maximizeBtn
                         text: window.visibility == Window.Maximized ? "🗗" : "🗖"
                         font.pixelSize: Qt.application.font.pixelSize * 1.6
                         onClicked: window.toggleMaximized()
+
+                        background: Rectangle {
+                            opacity: enabled ? 0.8 : 0.3
+                            color: maximizeBtn.down ? "#f5f5f5" : (maximizeBtn.hovered ? "#fefefe": "transparent")
+                        }
                     }
-                    ToolButton {
-                        text: qsTr("🗙")
+                    Button {
+                        id: closeBtn
+                        text: "🗙"
                         font.pixelSize: Qt.application.font.pixelSize * 1.4
-                        contentItem: Text {
-                            text: parent.text
-                            font: parent.font
-                            opacity: enabled ? 1.0 : 0.3
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            elide: Text.ElideRight
+                        background: Rectangle {
+                            anchors.fill: parent
+                            opacity: enabled ? 0.8 : 0.3
+                            color: closeBtn.down ? "#f5f5f5" : (closeBtn.hovered ? "#fefefe": "transparent")
                         }
                         onClicked: window.close()
                     }
